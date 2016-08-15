@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class TimeKiller
 {
 
-int year;
-int month;//перебор от 0 до 12 - arrayем или как там было
-int day;
-int hour;
-int minute;
-int second;
+static int year;
+static int month;//перебор от 0 до 12 - arrayем или как там было
+static int day;
+static int hour;
+static int minute;
+static int second;
 int errorflag;
-int MaxLength(int month, int year)
+static int MaxLength(int month, int year)
 {
 	/*if(month==1) return 31;
 	if((month==2)&&(year%4==0)) return 28;
@@ -55,10 +55,10 @@ switch(month) {
 	    return -1;
 }
 }
-int MaxLengthCheck(int day,int month,int year)
+static int MaxLengthCheck(int day,int month,int year,int hour,int minute,int second)
 {
 	
-	if((MaxLength(month,year)==-1)||(day<1)||(day>31)||(MaxLength(month,year)<day))
+	if((MaxLength(month,year)==-1)||(day<1)||(day>31)||(MaxLength(month,year)<day)||(hour>24)||(hour<0)||(minute>59)||(minute<0)||(second>59)||(second<0))
 	{return -1;}
 	else
 	{return 1;}
@@ -108,6 +108,7 @@ TimeKiller()
 	else
 	{
 		System.out.println ("Right date format");
+		int d=MaxLengthCheck(day,month,year,hour,minute,second);
 		in.close();
 	}
 }
@@ -125,5 +126,23 @@ try {
 } catch (java.text.ParseException e) {
     e.printStackTrace();
 } */	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	

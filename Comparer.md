@@ -2,8 +2,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.timezone;
-
+import java.io.File;
+import java.io.PrintWriter;
 public class Comparer extends TimeKiller
 {
 
@@ -11,7 +11,7 @@ public class Comparer extends TimeKiller
 	
 	
 
-long TimeTransformer(TimeKiller a)
+static long TimeTransformer(TimeKiller a)
 {
 
 	String date = new String ();
@@ -30,8 +30,21 @@ try {
     return -1;
 } 
 }
+/*
+ public class MyClass
+{
+   public void myMethod()
+   {
+      myNonStaticMethod(); 
+   }
+ 
+   public void myNonStaticMethod()
+   {
+   }
+}
+ */
 
-public long Compare(TimeKiller a)//вставить аргументы
+public static long Compare(TimeKiller a) //вставить аргументы
 {
 int count=0;
 long begin= System.currentTimeMillis(); //это сколько миллисекунд прошло от начала года
@@ -49,10 +62,9 @@ else
 	double percent=0;
 	String filename=new String ();
 	//пишем старую дату
-	Calendar.setTime(date);
-	filename=filename++""+Calendar.get(Calendar.MONTH)+""+Calendar.get(Calendar.YEAR)+""+Calendar.get(Calendar.HOUR)+""+Calendar.get(Calendar.MINUTE)+""+Calendar.get(Calendar.SECOND);
+	filename=filename+Calendar.get(Calendar.DAY_OF_MONTH)+""+Calendar.get(Calendar.MONTH)+""+Calendar.get(Calendar.YEAR)+""+Calendar.get(Calendar.HOUR)+""+Calendar.get(Calendar.MINUTE)+""+Calendar.get(Calendar.SECOND);
 	filename=filename+day+""+month+""+year+""+hour+""+minute+""+second+".txt";//это мы записали финальную дату
-	try{
+
 		File file = new File(filename);//txt файл имя - нач кон время
 
 	        if(!file.exists())
@@ -60,20 +72,17 @@ else
 		            file.createNewFile();
 		        }
 	 
-	        PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+	       
 	 
 
-	    } 
-	catch(IOException e) 
-		{
-	        throw new RuntimeException(e);
-	    }
-	
+
+
+	 PrintWriter out = new PrintWriter(file.getAbsoluteFile());
 	do
 	{
 		currenttime=System.currentTimeMillis();
 		percent= ((double)(end-currenttime)/(double)(end-begin));
-		 out.print("%f \n",percent);
+		 out.printf("%f \n",percent);
 		//пишем в файл расстояние в процентах
 	}
 	while(currenttime<end);
@@ -83,7 +92,10 @@ else
     return 0;
 }
 
-
+public static void main(String[] args){
+	   TimeKiller a=null;
+	   Comparer.Compare(a);
+	}
 
 }
 	
